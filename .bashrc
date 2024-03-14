@@ -9,7 +9,9 @@ run() {
         done
     else
         if [[ -f "$1" && $(head -n 1 "$1") == "#"* ]]; then
-            head -n 1 "$1" | sed 's/^#\s*//' | bash
+            command=$(head -n 1 "$1" | sed 's/^#\s*//; s/\s*$//')
+            echo "$command"
+            eval $command
         else
             echo "Error: '$1' is not a file or does not start with '#'."
         fi
